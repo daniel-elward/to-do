@@ -1,0 +1,1 @@
+export const addTaskBtn = document.getElementById('addNewTaskBtn');

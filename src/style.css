@@ -1,3 +1,29 @@
 body {
     background-color:antiquewhite;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1 {
+    font-size: 1.7rem;
+}
+
+.wrapper {
+    width: 90%;
+    margin: 0 auto;
+    height: 100vh;
+    padding: 20px;
+    border: 2px solid red;
+}
+
+.controlPanel {
+    width: 90%;
+    margin: 10px auto;
+    border: 2px solid red;
+}
+
+.display {
+    width: 90%;
+    margin: 10px auto;
+    border: 2px solid red;
 }
