@@ -1,0 +1,31 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+#projectWrapper {
+    width: 750px;
+    height: 100vh;
+    margin: 0 auto;
+    background-color: rgb(212, 189, 125);
+}
+
+.projectCard {
+    width:250px;
+    height: 350px;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 25px;
+    border:2px solid blueviolet;
+}
+
+.projectCardTitle {
+    width: 95%;
+    border:2px solid rgb(110, 226, 43);
+}
+
+.projectCardDescription {
+    width: 95%;
+    border:2px solid rgb(226, 95, 43);
+}
+
