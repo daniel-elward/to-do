@@ -16,4 +16,4 @@ defaultProject.taskThree = defaultTaskThree;
 
 console.log(defaultProject)
 
-displayProjects(defaultProject.title, defaultProject.description)
+displayProjects(defaultProject)
