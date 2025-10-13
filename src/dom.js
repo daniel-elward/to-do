@@ -31,15 +31,14 @@ function newTaskButton(buttonID, target) {
         button.setAttribute("class", "newTaskButton");
             button.setAttribute("id", `${buttonID}`)
                 target.appendChild(button);
-    };
+};
 
 
 export function displayProject() {
 
     clearDisplay();
 
-    //generates the project card element
-    for (let i = 0; i < projectArray.length; i++) {
+    projectArray.forEach(function (element){
 
         const div = document.createElement("div");
         const h1 = document.createElement("h1");
@@ -47,50 +46,31 @@ export function displayProject() {
         const ol = document.createElement("ol");
         const button = document.createElement("button");
         
-        const projectTitle = document.createTextNode(`${projectArray[i].title}`);
-        const projectDescription = document.createTextNode(`${projectArray[i].description}`);
+        const projectTitle = document.createTextNode(`${element.title}`);
+        const projectDescription = document.createTextNode(`${element.description}`);
+        const tasks = element.tasks;
 
-        div.classList.add("projectCard");
+        div.setAttribute("class", "projectCard");
             projectWrapper.appendChild(div);
-
-        //node list, iterate through to add data to each project card
-        const projectCard = document.querySelectorAll(".projectCard");
-
-            // loop iterates through the node list
-            // looping through the nodelist of multiple .class divs
-            // allows the loop to add the correct data into the correct 
-            // div.
-
-            // Before this all of the data was getting pushed into the first with 
-            // a matching .class name
-            for (let j = 0; j < projectCard.length; j++) {
-
                 h1.appendChild(projectTitle);
-                    projectCard[i].appendChild(h1);
+                    div.appendChild(h1);
+                        para.appendChild(projectDescription);
+                            div.appendChild(para);
 
-                para.appendChild(projectDescription);
-                    projectCard[i].appendChild(para);
+        div.appendChild(ol);
 
-                ol.classList.add("taskTitles");
-                    projectCard[i].appendChild(ol);
-                    
-                const taskList = projectArray[i].tasks;
+        tasks.forEach(function (element) {
 
-                //loop  through and display task titles
-                for (let k = 0; k < taskList.length; k++){
-                    
-                    // var needs to be here, li gets overwritten if not
-                    const li = document.createElement("li");
+            const li = document.createElement("li");
 
-                    li.textContent = taskList[k].title;
-                        ol.appendChild(li);
-                };
-            };
+            li.textContent = element.title;
+                ol.appendChild(li);
+        });
 
-            //new task and delete buttons
-            newTaskButton(projectArray[i].id, projectCard[i]);
-            deleteProjectButton(projectArray[i].id, projectCard[i]);
-    };
+        //new task and delete buttons
+        newTaskButton(element.id, div);
+        deleteProjectButton(element.id, div);
+    });
 };
 
 export function newProjectButton(){
