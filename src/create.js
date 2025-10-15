@@ -1,4 +1,4 @@
-import {displayProject} from "./dom";
+import {resetListeners} from "./dom";
 import {projectArray} from "./index.js";
 
 //id counters for projects and tasks
@@ -32,9 +32,9 @@ export class Task{
 
 export function createProject(){
 
-    const project = new Project(prompt("Title"), prompt("Description"))
+    const project = new Project(prompt("Title"), prompt("Description"));
 
-    return project;
+    resetListeners();
 };
 
 //new project button event
@@ -44,17 +44,14 @@ export function addNewProject(){
 
     projectButton.addEventListener("click", () => {
 
-        const ProjectTitle = prompt("Project Title");
-        const ProjectDescription = prompt("Project Description");
+        const ProjectTitle = prompt("Project Title"); //update to GUI
+        const ProjectDescription = prompt("Project Description"); //update to GUI
 
         const project = new Project(ProjectTitle, ProjectDescription);
         
         projectArray.push(project);
 
-        console.log(projectArray)
-
-        displayProject();
-        addNewTask();
+        resetListeners()
     });
 };
 
@@ -80,10 +77,32 @@ export function addNewTask(){
 
             projectArray[targetProjectID].tasks.push(task);
 
-            displayProject();
-            addNewTask();
+            resetListeners()
         });
     };
+};
+
+export function deleteProject(){
+
+    const deleteButton = document.querySelectorAll(".deleteProjectButton");
+    let projectToRemove = null;
+
+    deleteButton.forEach((element) => {
+
+        element.addEventListener("click", () => {
+
+            //element.name corresponds to the array index of the project to be deleted
+            const projectToMove = projectArray.splice(element.name, 1);
+
+            //need to specify index otherwise the whole array is added.
+            projectArray.push(projectToMove[0]);
+
+            projectArray.pop();
+
+            resetListeners()
+        });
+        
+    });    
 };
 
 

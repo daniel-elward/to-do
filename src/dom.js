@@ -1,4 +1,5 @@
 import {projectArray} from "./index.js";
+import {addNewTask, deleteProject} from "./create.js"
 
 const projectWrapper = document.getElementById("projectWrapper");
 
@@ -18,7 +19,8 @@ function deleteProjectButton(buttonID, target) {
 
     button.textContent = "Delete Project";
         button.setAttribute("class", "deleteProjectButton");
-            button.setAttribute("id", `deleteID${buttonID}`);
+            //use name to get the array index because divID is already used
+            button.setAttribute("name", `${buttonID}`);
                 target.appendChild(button);
 };
 
@@ -34,7 +36,7 @@ function newTaskButton(buttonID, target) {
 };
 
 
-export function displayProject() {
+function displayProject() {
 
     clearDisplay();
 
@@ -80,6 +82,13 @@ export function newProjectButton(){
     button.textContent = "New Project";
         button.setAttribute("id", "newProjectButton");
             projectWrapper.appendChild(button);
+};
+
+export function resetListeners() {
+
+    displayProject();    
+    addNewTask();
+    deleteProject();
 };
 
 
