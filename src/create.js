@@ -3,7 +3,6 @@ import {projectArray} from "./index.js";
 
 //id counters for projects and tasks
 let projectCounter = 0;
-let taskCounter = 0;
 
 export class Project{
 
@@ -26,7 +25,6 @@ export class Task{
         this.dueDate = "22-03-2044";
         this.priority = priority;
         this.complete = false;
-        this.id = taskCounter++; //id number = position in array
     };
 };
 
@@ -63,8 +61,6 @@ export function addNewTask(){
     for (let i = 0; i < taskButton.length; i++) {
 
         taskButton[i].addEventListener("click", (event) => {
-
-            console.log(event.target.id);
 
             const taskTitle = prompt("Task Title");
             const taskDescription = prompt("Task Description");
@@ -105,61 +101,29 @@ export function deleteProject(){
     });    
 };
 
+export function deleteTask(){
 
+    const deleteButton = document.querySelectorAll(".deleteTaskButton");
 
+    deleteButton.forEach((element) => {
 
-/*
-
-ORIGINAL CODE
-
-
-export class Project{
-
-    constructor(title, description) {
-
-        this.title = title;
-        this.description = description;
-        this.tasks = [];
-    };
-};
-
-export class Task{
-
-    constructor(title, description, dueDate, priority) {
-
-        this.title = title;
-        this.description = description;
-        this.dueDate = "22-03-2044";
-        this.priority = priority;
-    };
-};
-
-export function addTask(target) {
-
-    const foo = document.getElementById("newTaskButton");
-
-    foo.addEventListener("click", (target) => {
-
-        const newTask = new Task(`${prompt("Title")}`, `${prompt("Description")}`, "date", `${prompt("Priority")}`);
+        const tasks = projectArray[element.name];
         
-            defaultProject.tasks.push(newTask);
-    });
+        element.addEventListener("click", () => {
+
+            const taskID = element.name;
+            const projectID = element.value;
+
+            //element.name corresponds to the array index of the project to be deleted
+            const projectToMove =  projectArray[projectID].tasks.splice(taskID, 1);
+
+            //need to specify index otherwise the whole array is added.
+            projectArray[projectID].tasks.push(projectToMove[0]);
+
+            projectArray[projectID].tasks.pop();
+
+            resetListeners()
+        });
+        
+    });    
 };
-
-export function addProject() {
-
-    const newProjectButton = document.getElementById("newProjectButton");
-
-    const createProject = null;
-     console.log(createProject)
-
-    newProjectButton.addEventListener("click", () => {
-
-        const createProject = new Project(`${prompt("Title")}`, `${prompt("Description")}`);
-        console.log(createProject)
-
-        return createProject;
-    });
-};
-
-*/

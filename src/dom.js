@@ -1,5 +1,5 @@
 import {projectArray} from "./index.js";
-import {addNewTask, deleteProject} from "./create.js"
+import {addNewTask, deleteProject, deleteTask} from "./create.js"
 
 const projectWrapper = document.getElementById("projectWrapper");
 
@@ -24,6 +24,18 @@ function deleteProjectButton(buttonID, target) {
                 target.appendChild(button);
 };
 
+function deleteTaskButton(buttonID, projectID, target) {
+
+    const button = document.createElement("button");
+
+    button.textContent = "Delete Task";
+        button.setAttribute("class", "deleteTaskButton");
+            //use name to get the array index because divID is already used
+            button.setAttribute("name", `${buttonID}`);//task ID
+                button.setAttribute("value", `${projectID}`);//project ID
+                    target.appendChild(button);
+};
+
 function newTaskButton(buttonID, target) {
 
     const button = document.createElement("button");
@@ -34,7 +46,6 @@ function newTaskButton(buttonID, target) {
             button.setAttribute("id", `${buttonID}`)
                 target.appendChild(button);
 };
-
 
 function displayProject() {
 
@@ -51,6 +62,7 @@ function displayProject() {
         const projectTitle = document.createTextNode(`${element.title}`);
         const projectDescription = document.createTextNode(`${element.description}`);
         const tasks = element.tasks;
+        const projectID = element.id;
 
         div.setAttribute("class", "projectCard");
             projectWrapper.appendChild(div);
@@ -61,12 +73,14 @@ function displayProject() {
 
         div.appendChild(ol);
 
-        tasks.forEach(function (element) {
+        tasks.forEach(function (element, index) {
 
             const li = document.createElement("li");
 
             li.textContent = element.title;
                 ol.appendChild(li);
+                    //index = counter to get array index of the tasks
+                    deleteTaskButton(index, projectID, li); 
         });
 
         //new task and delete buttons
@@ -89,69 +103,5 @@ export function resetListeners() {
     displayProject();    
     addNewTask();
     deleteProject();
+    deleteTask();
 };
-
-
-
-
-
-/*
-
-ORIGINAL CODE
-
-export function displayProjects(project){
-
-    const div = document.createElement("div");
-    const h1 = document.createElement("h1");
-    const para = document.createElement("p");
-    const ol = document.createElement("ol");
-    const button = document.createElement("button");
-
-    const projectWrapper = document.getElementById("projectWrapper");
-    const titleText = document.createTextNode(`${project.title}`);
-    const descriptionText = document.createTextNode(`${project.description}`);
-    const tasks = project.tasks;
-
-    div.classList.add("projectCard");
-        projectWrapper.appendChild(div);
-
-    const projectCard = document.querySelector(".projectCard");
-
-    h1.appendChild(titleText);
-        projectCard.appendChild(h1);
-
-    para.appendChild(descriptionText);
-        projectCard.appendChild(para);
-
-    //ol.setAttribute("id", "taskTitles");
-    ol.classList.add("taskTitles");
-        projectCard.appendChild(ol);
-
-    const taskList = document.querySelector(".taskTitles");
-
-    tasks.forEach(element => {
-
-        // var needs to be here, li gets overwritten if not
-        const li = document.createElement("li");
-
-        li.textContent = element.title;
-            taskList.appendChild(li);
-    });
-
-    // button.setAttribute("id", "newTaskButton");
-    //     button.setAttribute("name", `${project.title}`);
-    //         projectCard.appendChild(button);
-    //             button.textContent = "New Task";
-};
-
-export function newProjectButton() {
-
-    const button = document.createElement("button");
-    const projectWrapper = document.getElementById("projectWrapper");
-
-    button.setAttribute("id", "newProjectButton");
-        projectWrapper.appendChild(button);
-            button.textContent = "New Project";
-};
-
-*/
