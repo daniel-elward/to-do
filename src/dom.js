@@ -1,5 +1,5 @@
 import {projectArray} from "./index.js";
-import {addNewTask, deleteProject, deleteTask} from "./create.js"
+import {addNewTask, deleteProject, deleteTask, addNewProject} from "./create.js"
 
 const projectWrapper = document.getElementById("projectWrapper");
 
@@ -47,7 +47,7 @@ function newTaskButton(buttonID, target) {
                 target.appendChild(button);
 };
 
-function displayProject() {
+export function displayProject() {
 
     clearDisplay();
 
@@ -89,7 +89,7 @@ function displayProject() {
     });
 };
 
-function closePopup(){
+export function closePopup(){
 
     const projectButton = document.getElementsByName("newProjectForm");
     const taskButton = document.getElementsByName("newTaskForm");
@@ -126,9 +126,11 @@ export function newProjectButton(){
 
 export function resetListeners() {
 
-    displayProject();    
+    displayProject(); 
     addNewTask();
     deleteProject();
     deleteTask();
-    closePopup()
+    closePopup();
+    addNewProject();
+
 };

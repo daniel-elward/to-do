@@ -1,4 +1,4 @@
-import {resetListeners, popup} from "./dom";
+import {resetListeners, displayProject } from "./dom";
 import {projectArray} from "./index.js";
 
 //id counters for projects and tasks
@@ -28,39 +28,44 @@ export class Task{
     };
 };
 
-export function createProject(){
-
-    const project = new Project(prompt("Title"), prompt("Description"));
-
-    resetListeners();
-};
-
-//new project button event
 export function addNewProject(){
 
     const projectButton = document.getElementById("newProjectButton");
+    const submitter = document.getElementById("newProjectSubmit");
 
     projectButton.addEventListener("click", () => {
 
-        const form = document.getElementById("newProjectForm");
+        const formDiv = document.getElementById("newProjectForm");
 
-        form.style.display = "inline";
+        formDiv.style.display = "inline";
+    });
 
-        // const ProjectTitle = prompt("Project Title"); //update to GUI
-        // const ProjectDescription = prompt("Project Description"); //update to GUI
+    submitter.addEventListener("click", (event) => {
 
-        // const project = new Project(ProjectTitle, ProjectDescription);
+        const form = document.getElementById("newProject");
+        let data = new FormData(form, submitter);
         
-        // projectArray.push(project);
+        const title = data.get("projectTitle");
+        const description = data.get("projectDescription");  
+        const project = new Project(title, description);
 
-        resetListeners()
+        projectArray.push(project);
+
+        console.log(projectArray);
+
+        form.reset();
+
+        // resetListeners();
+        displayProject();
+        
     });
 };
 
-//new task button event
 export function addNewTask(){
 
     const taskButton = document.querySelectorAll(".newTaskButton");
+    const submitter = document.getElementById("newTaskSubmit");
+
 
     for (let i = 0; i < taskButton.length; i++) {
 
@@ -70,18 +75,29 @@ export function addNewTask(){
 
             form.style.display = "inline";
 
-            // const taskTitle = prompt("Task Title");
-            // const taskDescription = prompt("Task Description");
-            // const taskDate = prompt("Task DueDate");
-            // const taskPriority = prompt("Task Priority");
+            const targetProjectID = event.target.id;
 
-            // const targetProjectID = event.target.id;
+            submitter.addEventListener("click", (event) => {
 
-            // const task = new Task(taskTitle, taskDescription, taskDate, taskPriority);
+                const form = document.getElementById("newTask");
+                let data = new FormData(form, submitter);
+                
+                const title = data.get("taskTitle");
+                const description = data.get("taskDescription");  
+                const date = data.get("taskDate");  
+                const priority = data.get("taskPriority");  
 
-            // projectArray[targetProjectID].tasks.push(task);
+                const task = new Project(title, description, date, priority);
 
-            resetListeners()
+                projectArray[targetProjectID].tasks.push(task);
+
+                console.log(projectArray);
+
+                form.reset();
+
+                resetListeners();
+                //displayProject();
+            });
         });
     };
 };

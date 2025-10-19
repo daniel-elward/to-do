@@ -1,5 +1,5 @@
 import "./style.css";
-import {createProject, Project, Task, addNewProject, addNewTask, deleteProject} from "./create.js";
+import {Project, Task, addNewProject, addNewTask, deleteProject} from "./create.js";
 import {resetListeners, newProjectButton} from "./dom.js";
 
 export const projectArray = [];
@@ -29,6 +29,5 @@ projectArray[2].tasks.push(defaultTaskFive);
 projectArray[2].tasks.push(defaultTaskSix);
 
 newProjectButton();
-addNewProject();
 
 resetListeners();

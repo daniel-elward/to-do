@@ -13,13 +13,13 @@
 
         <h1>Project Form</h1>
 
-        <form name="newProject">
+        <form id="newProject" onsubmit="event.preventDefault()">
 
             <label>Title</label> <br /><input name="projectTitle" required> <br />
             <label>Description</label> <br /><input name="projectDescription" required> <br />
 
             <button type="reset">Clear</button>
-            <button type="submit">Submit</button>
+            <button id="newProjectSubmit">Submit</button>
         </form>
     </div>
 
@@ -29,7 +29,7 @@
 
         <h1>Task Form</h1>
 
-            <form name="newTask">
+            <form id="newTask" onsubmit="event.preventDefault()">
 
             <label>Title</label> <br /><input name="taskTitle" required> <br />
 
@@ -38,17 +38,17 @@
             <label>Due Date</label> <br /><input type="date" name="taskDate"> <br />
 
             <label>Priority</label> <br />
-            <input type="radio" name="priority" value="lowPriority" />
+            <input type="radio" name="taskPriority" value="lowPriority" />
             <label>Low Priority</label>
 
-            <input type="radio" name="priority" value="medPriority" />
+            <input type="radio" name="taskPriority" value="medPriority" />
             <label>Med Priority</label>
 
-            <input type="radio" name="priority" value="highPriority" /> 
+            <input type="radio" name="taskPriority" value="highPriority" /> 
             <label>High Priority</label> <br />
 
             <button type="reset">Clear</button>
-            <button type="submit">Submit</button>
+            <button id="newTaskSubmit">Submit</button>
         </form>
     </div>
 </div>
