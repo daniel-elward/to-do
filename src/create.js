@@ -1,4 +1,4 @@
-import {resetListeners} from "./dom";
+import {resetListeners, popup} from "./dom";
 import {projectArray} from "./index.js";
 
 //id counters for projects and tasks
@@ -42,12 +42,16 @@ export function addNewProject(){
 
     projectButton.addEventListener("click", () => {
 
-        const ProjectTitle = prompt("Project Title"); //update to GUI
-        const ProjectDescription = prompt("Project Description"); //update to GUI
+        const form = document.getElementById("newProjectForm");
 
-        const project = new Project(ProjectTitle, ProjectDescription);
+        form.style.display = "inline";
+
+        // const ProjectTitle = prompt("Project Title"); //update to GUI
+        // const ProjectDescription = prompt("Project Description"); //update to GUI
+
+        // const project = new Project(ProjectTitle, ProjectDescription);
         
-        projectArray.push(project);
+        // projectArray.push(project);
 
         resetListeners()
     });
@@ -62,16 +66,20 @@ export function addNewTask(){
 
         taskButton[i].addEventListener("click", (event) => {
 
-            const taskTitle = prompt("Task Title");
-            const taskDescription = prompt("Task Description");
-            const taskDate = prompt("Task DueDate");
-            const taskPriority = prompt("Task Priority");
+            const form = document.getElementById("newTaskForm");
 
-            const targetProjectID = event.target.id;
+            form.style.display = "inline";
 
-            const task = new Task(taskTitle, taskDescription, taskDate, taskPriority);
+            // const taskTitle = prompt("Task Title");
+            // const taskDescription = prompt("Task Description");
+            // const taskDate = prompt("Task DueDate");
+            // const taskPriority = prompt("Task Priority");
 
-            projectArray[targetProjectID].tasks.push(task);
+            // const targetProjectID = event.target.id;
+
+            // const task = new Task(taskTitle, taskDescription, taskDate, taskPriority);
+
+            // projectArray[targetProjectID].tasks.push(task);
 
             resetListeners()
         });

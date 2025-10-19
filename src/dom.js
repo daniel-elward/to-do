@@ -89,6 +89,32 @@ function displayProject() {
     });
 };
 
+function closePopup(){
+
+    const projectButton = document.getElementsByName("newProjectForm");
+    const taskButton = document.getElementsByName("newTaskForm");
+
+    projectButton.forEach((element) => {
+
+        element.addEventListener("click", () => {
+
+            const projectPopup = document.getElementById(element.name);
+
+            projectPopup.style.display = "none";
+        });
+    });
+
+    taskButton.forEach((element) => {
+
+        element.addEventListener("click", () => {
+
+            const taskPopup = document.getElementById(element.name);
+
+            taskPopup.style.display = "none";
+        });
+    });
+};
+
 export function newProjectButton(){
 
     const button = document.createElement("button");
@@ -104,4 +130,5 @@ export function resetListeners() {
     addNewTask();
     deleteProject();
     deleteTask();
+    closePopup()
 };

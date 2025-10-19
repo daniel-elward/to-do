@@ -29,3 +29,24 @@ html, body {
     border:2px solid rgb(226, 95, 43);
 }
 
+#newProjectForm {
+    width: 50%;
+    min-height: 350px;
+    background-color: green;
+    z-index: 1;
+    position: absolute;
+    left: 25%;
+    top: 25%;
+    display: none;
+}
+
+#newTaskForm {
+    width: 50%;
+    min-height: 350px;
+    background-color: red;
+    z-index: 0;
+    position: absolute;    
+    left: 25%;
+    top: 25%;
+    display: none;
+}
