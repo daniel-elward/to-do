@@ -126,11 +126,14 @@ export function newProjectButton(){
 
 export function resetListeners() {
 
-    displayProject(); 
-    addNewTask();
-    deleteProject();
-    deleteTask();
-    closePopup();
+    
     addNewProject();
 
+    deleteProject();
+    deleteTask();
+
+    closePopup();
+
+    displayProject(); 
+    addNewTask(); //adding this here makes the popup work
 };

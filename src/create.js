@@ -1,4 +1,4 @@
-import {resetListeners, displayProject } from "./dom";
+import {resetListeners, displayProject, closePopup } from "./dom";
 import {projectArray} from "./index.js";
 
 //id counters for projects and tasks
@@ -32,17 +32,20 @@ export function addNewProject(){
 
     const projectButton = document.getElementById("newProjectButton");
     const submitter = document.getElementById("newProjectSubmit");
+    const formDiv = document.getElementById("newProjectForm");
+    const form = document.getElementById("newProject")
 
     projectButton.addEventListener("click", () => {
-
-        const formDiv = document.getElementById("newProjectForm");
 
         formDiv.style.display = "inline";
     });
 
-    submitter.addEventListener("click", (event) => {
+    form.addEventListener("submit", (event) => {
 
-        const form = document.getElementById("newProject");
+        event.preventDefault();
+
+        formDiv.style.display = "none";
+
         let data = new FormData(form, submitter);
         
         const title = data.get("projectTitle");
@@ -51,13 +54,22 @@ export function addNewProject(){
 
         projectArray.push(project);
 
-        console.log(projectArray);
-
         form.reset();
 
-        // resetListeners();
-        displayProject();
-        
+        //calling when addNewProject is being called here it is duplicating 
+        //enteries, even if they are blank. 
+
+        //resetListeners();
+
+        addNewTask();
+        //addNewProject();
+    
+        deleteProject();
+        deleteTask();
+    
+        closePopup();
+    
+        displayProject(); 
     });
 };
 
@@ -65,41 +77,60 @@ export function addNewTask(){
 
     const taskButton = document.querySelectorAll(".newTaskButton");
     const submitter = document.getElementById("newTaskSubmit");
+    const taskForm = document.getElementById("newTask")
+    const formDiv = document.getElementById("newTaskForm");
 
+    let taskButtonID = null;
 
-    for (let i = 0; i < taskButton.length; i++) {
+    taskButton.forEach((event) => {
 
-        taskButton[i].addEventListener("click", (event) => {
+        event.addEventListener("click", () => {
 
-            const form = document.getElementById("newTaskForm");
+            formDiv.style.display = "inline";
+            taskButtonID = event.id;
 
-            form.style.display = "inline";
-
-            const targetProjectID = event.target.id;
-
-            submitter.addEventListener("click", (event) => {
-
-                const form = document.getElementById("newTask");
-                let data = new FormData(form, submitter);
-                
-                const title = data.get("taskTitle");
-                const description = data.get("taskDescription");  
-                const date = data.get("taskDate");  
-                const priority = data.get("taskPriority");  
-
-                const task = new Project(title, description, date, priority);
-
-                projectArray[targetProjectID].tasks.push(task);
-
-                console.log(projectArray);
-
-                form.reset();
-
-                resetListeners();
-                //displayProject();
-            });
+            // return taskButtonID;
         });
-    };
+    });
+
+    taskForm.addEventListener("submit", (event) => {
+
+        event.preventDefault();
+
+        formDiv.style.display = "none";
+
+        let data = new FormData(taskForm, submitter);
+        
+        const title = data.get("taskTitle");
+        const description = data.get("taskDescription");  
+        const date = data.get("taskDate");  
+        const priority = data.get("taskPriority");  
+
+        const task = new Task(title, description, date, priority);
+
+        const targetProjectID = taskButtonID;
+
+        //console.log(taskButtonID)
+
+        projectArray[targetProjectID].tasks.push(task);
+
+        taskForm.reset();
+
+        //calling when addNewTask is being called here it is duplicating 
+        //enteries, even if they are blank. 
+
+        //resetListeners();
+
+        // addNewTask();
+        // addNewProject();
+    
+        // deleteProject();
+        // deleteTask();
+    
+        // closePopup();
+    
+            displayProject(); 
+        });
 };
 
 export function deleteProject(){

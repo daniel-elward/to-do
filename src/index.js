@@ -1,5 +1,5 @@
 import "./style.css";
-import {Project, Task, addNewProject, addNewTask, deleteProject} from "./create.js";
+import {Project, Task, addNewProject, addNewTask, deleteProject, validateForm} from "./create.js";
 import {resetListeners, newProjectButton} from "./dom.js";
 
 export const projectArray = [];
