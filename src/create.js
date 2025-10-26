@@ -55,21 +55,6 @@ export function addNewProject(){
         projectArray.push(project);
 
         form.reset();
-
-        //calling when addNewProject is being called here it is duplicating 
-        //enteries, even if they are blank. 
-
-        //resetListeners();
-
-        addNewTask();
-        //addNewProject();
-    
-        deleteProject();
-        deleteTask();
-    
-        closePopup();
-    
-        displayProject(); 
     });
 };
 
@@ -89,8 +74,8 @@ export function addNewTask(){
             formDiv.style.display = "inline";
             taskButtonID = event.id;
 
-            // return taskButtonID;
-        });
+            console.log(taskButtonID)
+        });   
     });
 
     taskForm.addEventListener("submit", (event) => {
@@ -110,27 +95,16 @@ export function addNewTask(){
 
         const targetProjectID = taskButtonID;
 
-        //console.log(taskButtonID)
+        
 
         projectArray[targetProjectID].tasks.push(task);
+        console.log(projectArray[targetProjectID].tasks[0])
+        displayProject();
 
         taskForm.reset();
 
-        //calling when addNewTask is being called here it is duplicating 
-        //enteries, even if they are blank. 
-
-        //resetListeners();
-
-        // addNewTask();
-        // addNewProject();
-    
-        // deleteProject();
-        // deleteTask();
-    
-        // closePopup();
-    
-            displayProject(); 
-        });
+        
+    });
 };
 
 export function deleteProject(){
@@ -149,11 +123,8 @@ export function deleteProject(){
             projectArray.push(projectToMove[0]);
 
             projectArray.pop();
-
-            resetListeners()
         });
-        
-    });    
+    });
 };
 
 export function deleteTask(){
@@ -176,9 +147,7 @@ export function deleteTask(){
             projectArray[projectID].tasks.push(projectToMove[0]);
 
             projectArray[projectID].tasks.pop();
-
-            resetListeners()
         });
         
-    });    
+    });
 };

@@ -1,6 +1,6 @@
 import "./style.css";
-import {Project, Task, addNewProject, addNewTask, deleteProject, validateForm} from "./create.js";
-import {resetListeners, newProjectButton} from "./dom.js";
+import {Project, Task, addNewProject, addNewTask, deleteProject, deleteTask} from "./create.js";
+import {resetListeners, newProjectButton, displayProject, closePopup} from "./dom.js";
 
 export const projectArray = [];
 
@@ -30,4 +30,20 @@ projectArray[2].tasks.push(defaultTaskSix);
 
 newProjectButton();
 
-resetListeners();
+
+//resetListeners();
+
+addNewProject();
+// displayProject(); 
+deleteProject();
+deleteTask();
+// closePopup();
+addNewTask();
+
+// closePopup();
+displayProject(); 
+
+addNewProject();
+addNewTask(); 
+
+

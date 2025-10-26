@@ -51,7 +51,7 @@ export function displayProject() {
 
     clearDisplay();
 
-    projectArray.forEach(function (element){
+    projectArray.forEach((element) => {
 
         const div = document.createElement("div");
         const h1 = document.createElement("h1");
@@ -87,6 +87,14 @@ export function displayProject() {
         newTaskButton(element.id, div);
         deleteProjectButton(element.id, div);
     });
+
+    // closePopup();
+
+    // addNewProject();
+    // addNewTask(); 
+
+    // deleteProject();
+    // deleteTask();
 };
 
 export function closePopup(){
@@ -126,14 +134,16 @@ export function newProjectButton(){
 
 export function resetListeners() {
 
-    
+
     addNewProject();
 
-    deleteProject();
-    deleteTask();
-
-    closePopup();
 
     displayProject(); 
-    addNewTask(); //adding this here makes the popup work
+    
+    
+    deleteProject();
+    deleteTask();
+    closePopup();
+    addNewTask(); 
+
 };
