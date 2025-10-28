@@ -1,4 +1,4 @@
-import {resetListeners, displayProject, closePopup } from "./dom";
+import {resetListeners, displayProject, closePopup, sendToStorage, getFromStorage } from "./dom";
 import {projectArray} from "./index.js";
 
 //id counters for projects and tasks
@@ -42,19 +42,21 @@ export function addNewProject(){
 
     form.addEventListener("submit", (event) => {
 
-        event.preventDefault();
-
         formDiv.style.display = "none";
 
         let data = new FormData(form, submitter);
         
         const title = data.get("projectTitle");
-        const description = data.get("projectDescription");  
+        const description = data.get("projectDescription");
         const project = new Project(title, description);
 
-        projectArray.push(project);
+        sendToStorage(title, project);
 
         form.reset();
+
+        displayProject();
+
+        form.preventDefault();
     });
 };
 
@@ -65,27 +67,25 @@ export function addNewTask(){
     const taskForm = document.getElementById("newTask")
     const formDiv = document.getElementById("newTaskForm");
 
-    let taskButtonID = null;
+    let taskButtonTitle = null;
 
     taskButton.forEach((event) => {
 
         event.addEventListener("click", () => {
 
             formDiv.style.display = "inline";
-            taskButtonID = event.id;
-
-            console.log(taskButtonID)
+            taskButtonTitle = event.title;
         });   
     });
 
     taskForm.addEventListener("submit", (event) => {
 
-        event.preventDefault();
+        
 
         formDiv.style.display = "none";
 
         let data = new FormData(taskForm, submitter);
-        
+
         const title = data.get("taskTitle");
         const description = data.get("taskDescription");  
         const date = data.get("taskDate");  
@@ -93,17 +93,17 @@ export function addNewTask(){
 
         const task = new Task(title, description, date, priority);
 
-        const targetProjectID = taskButtonID;
+        const targetProject = getFromStorage(taskButtonTitle);
 
+        targetProject.tasks.push(task);
+
+        sendToStorage(targetProject.title, targetProject, taskButtonTitle);
         
+        // taskForm.reset();
 
-        projectArray[targetProjectID].tasks.push(task);
-        console.log(projectArray[targetProjectID].tasks[0])
         displayProject();
 
-        taskForm.reset();
-
-        
+        taskForm.preventDefault();
     });
 };
 
@@ -117,12 +117,12 @@ export function deleteProject(){
         element.addEventListener("click", () => {
 
             //element.name corresponds to the array index of the project to be deleted
-            const projectToMove = projectArray.splice(element.name, 1);
+            // const projectToMove = projectArray.splice(element.name, 1);
 
             //need to specify index otherwise the whole array is added.
-            projectArray.push(projectToMove[0]);
+            // projectArray.push(projectToMove[0]);
 
-            projectArray.pop();
+            // projectArray.pop();
         });
     });
 };
@@ -133,7 +133,7 @@ export function deleteTask(){
 
     deleteButton.forEach((element) => {
 
-        const tasks = projectArray[element.name];
+        // const tasks = projectArray[element.name];
         
         element.addEventListener("click", () => {
 
@@ -141,12 +141,12 @@ export function deleteTask(){
             const projectID = element.value;
 
             //element.name corresponds to the array index of the project to be deleted
-            const projectToMove =  projectArray[projectID].tasks.splice(taskID, 1);
+            // const projectToMove =  projectArray[projectID].tasks.splice(taskID, 1);
 
             //need to specify index otherwise the whole array is added.
-            projectArray[projectID].tasks.push(projectToMove[0]);
+            // projectArray[projectID].tasks.push(projectToMove[0]);
 
-            projectArray[projectID].tasks.pop();
+            // projectArray[projectID].tasks.pop();
         });
         
     });
