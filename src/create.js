@@ -69,18 +69,25 @@ export function addNewTask(){
 
     let taskButtonTitle = null;
 
-    taskButton.forEach((event) => {
+    document.addEventListener("click", (event => {
 
-        event.addEventListener("click", () => {
+        if (event.target.matches(".newTaskButton")){
 
             formDiv.style.display = "inline";
-            taskButtonTitle = event.title;
-        });   
-    });
+            taskButtonTitle = event.target.title;
+        };
+    }));
+
+    // taskButton.forEach((event) => {
+
+    //     event.addEventListener("click", () => {
+
+    //         formDiv.style.display = "inline";
+    //         taskButtonTitle = event.title;
+    //     });   
+    // });
 
     taskForm.addEventListener("submit", (event) => {
-
-        
 
         formDiv.style.display = "none";
 
@@ -97,9 +104,9 @@ export function addNewTask(){
 
         targetProject.tasks.push(task);
 
-        sendToStorage(targetProject.title, targetProject, taskButtonTitle);
+        sendToStorage(targetProject.title, targetProject);
         
-        // taskForm.reset();
+        taskForm.reset();
 
         displayProject();
 
@@ -109,45 +116,34 @@ export function addNewTask(){
 
 export function deleteProject(){
 
-    const deleteButton = document.querySelectorAll(".deleteProjectButton");
-    let projectToRemove = null;
+    document.addEventListener("click", (event) => {
 
-    deleteButton.forEach((element) => {
+        if (event.target.matches(".deleteProjectButton")){
 
-        element.addEventListener("click", () => {
-
-            //element.name corresponds to the array index of the project to be deleted
-            // const projectToMove = projectArray.splice(element.name, 1);
-
-            //need to specify index otherwise the whole array is added.
-            // projectArray.push(projectToMove[0]);
-
-            // projectArray.pop();
-        });
+            const projectKey = event.target.name;
+            localStorage.removeItem(projectKey);
+            displayProject();
+        };
     });
 };
 
 export function deleteTask(){
 
-    const deleteButton = document.querySelectorAll(".deleteTaskButton");
+    document.addEventListener("click", (event) => {
 
-    deleteButton.forEach((element) => {
+        if (event.target.matches(".deleteTaskButton")){
 
-        // const tasks = projectArray[element.name];
-        
-        element.addEventListener("click", () => {
+            const taskArrayIndex = event.target.name;
+            const projectKey = event.target.value;
+            const project = getFromStorage(projectKey);
 
-            const taskID = element.name;
-            const projectID = element.value;
+            const taskToRemove = project.tasks.splice(taskArrayIndex, 1);
+            project.tasks.push(taskToRemove[0]);
+            project.tasks.pop();
 
-            //element.name corresponds to the array index of the project to be deleted
-            // const projectToMove =  projectArray[projectID].tasks.splice(taskID, 1);
+            sendToStorage(project.title, project)
 
-            //need to specify index otherwise the whole array is added.
-            // projectArray[projectID].tasks.push(projectToMove[0]);
-
-            // projectArray[projectID].tasks.pop();
-        });
-        
+            displayProject();
+        };
     });
 };
