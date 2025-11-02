@@ -1,10 +1,10 @@
 import "./style.css";
-import {Project, Task, addNewProject, addNewTask, deleteProject, deleteTask} from "./create.js";
-import {resetListeners, sendToStorage, newProjectButton, displayProject, closePopup, getFromStorage} from "./dom.js";
+import {Project, addNewProject, addNewTask, deleteProject, deleteTask} from "./create.js";
+import {newProjectButton, displayProject, closePopup, getFromStorage,expandTask} from "./dom.js";
 
 (function setDefaultProject(){
 
-    const defaultProject = getFromStorage("My Daily");
+    const defaultProject = getFromStorage("My Daily Tasks");
 
     if (defaultProject === null){
 
@@ -17,10 +17,9 @@ import {resetListeners, sendToStorage, newProjectButton, displayProject, closePo
 
 newProjectButton();
 closePopup();
-
 displayProject();
-
 addNewProject()
 addNewTask();
 deleteProject();
 deleteTask();
+expandTask();

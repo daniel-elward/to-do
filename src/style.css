@@ -50,3 +50,30 @@ html, body {
     top: 25%;
     display: none;
 }
+
+.taskComplete {
+    background-color: blue;
+}
+
+.lowPriority {
+    color: rgb(44, 158, 16);
+}
+
+.mediumPriority {
+    color: rgb(238, 125, 20);
+}
+
+.highPriority {
+    color: rgb(105, 3, 3);
+}
+
+#taskPopup{
+    width: 50%;
+    border-radius: 25px;
+    border: 2px solid red;
+    background-color: aqua;
+    position: absolute;
+    left: 25%;
+    top: 25%;
+    display: none;
+}

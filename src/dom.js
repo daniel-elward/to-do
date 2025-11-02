@@ -1,5 +1,4 @@
-import {projectArray} from "./index.js";
-import {addNewTask, deleteProject, deleteTask, addNewProject} from "./create.js"
+import {addNewTask, addNewProject} from "./create.js"
 
 const projectWrapper = document.getElementById("projectWrapper");
 
@@ -28,7 +27,7 @@ function deleteTaskButton(buttonID, projectID, target) {
 
     const button = document.createElement("button");
 
-    button.textContent = "Delete Task";
+    button.innerHTML = "&#10060";
         button.setAttribute("class", "deleteTaskButton");
             //use name to get the array index because divID is already used
             button.setAttribute("name", `${buttonID}`);//task ID
@@ -45,6 +44,48 @@ function newTaskButton(buttonTitle, target) {
         button.setAttribute("class", "newTaskButton");
             button.setAttribute("title", `${buttonTitle}`)
                 target.appendChild(button);
+};
+
+function expandTaskButton(buttonID, projectID, target){
+
+    const button = document.createElement("button");
+
+    button.innerHTML = "&#10067";
+        button.setAttribute("class", "expandTaskButton");
+            //use name to get the array index because divID is already used
+            button.setAttribute("name", `${buttonID}`);//task ID
+                button.setAttribute("value", `${projectID}`);//project ID
+                    target.appendChild(button);
+};
+
+export function expandTask(){
+
+    const title = document.querySelector(".taskTitle");
+    const description = document.querySelector(".taskDescription");
+    const date = document.querySelector(".taskDueDate");
+    const priority = document.querySelector(".taskPriority");
+
+    let project = null;
+
+    document.addEventListener("click", (event) => {
+
+        if (event.target.matches(".expandTaskButton")){
+            
+            const taskIndex = event.target.name;
+            const popupDiv = document.getElementById("taskPopup");
+            
+            project = getFromStorage(event.target.value);
+
+            const task = project.tasks;
+
+            title.innerText = task[taskIndex].title;
+            description.innerText = task[taskIndex].description;
+            date.innerText = task[taskIndex].dueDate;
+            priority.innerText = task[taskIndex].priority;
+
+            popupDiv.style.display = "inline";
+        };
+    });
 };
 
 export function displayProject() {
@@ -82,16 +123,31 @@ export function displayProject() {
         tasks.forEach((element, index) => {
 
             const li = document.createElement("li");
+            const priorityLevel = element.priority;
 
             li.textContent = element.title;
                 ol.appendChild(li);
+
+                    if (priorityLevel === "lowPriority"){
+
+                        li.classList.add("lowPriority")
+                    } else if (priorityLevel === "medPriority"){
+
+                        li.classList.add("mediumPriority")
+                    } else if (priorityLevel === "highPriority"){
+
+                        li.classList.add("highPriority")
+                    };
+
                     //index = counter to get array index of the tasks
-                    deleteTaskButton(index, currentProjectTitle, li); 
+                    deleteTaskButton(index, currentProjectTitle, li);
+                    expandTaskButton(index, currentProjectTitle, li);
         });
 
         //new task and delete buttons
         newTaskButton(currentProjectTitle, div);
         deleteProjectButton(currentProjectTitle, div);
+        
     };
 };
 
@@ -99,6 +155,7 @@ export function closePopup(){
 
     const projectButton = document.getElementsByName("newProjectForm");
     const taskButton = document.getElementsByName("newTaskForm");
+    const taskExpand = document.getElementsByName("taskPopup");
 
     projectButton.forEach((element) => {
 
@@ -111,6 +168,16 @@ export function closePopup(){
     });
 
     taskButton.forEach((element) => {
+
+        element.addEventListener("click", () => {
+
+            const taskPopup = document.getElementById(element.name);
+
+            taskPopup.style.display = "none";
+        });
+    });
+
+    taskExpand.forEach((element) => {
 
         element.addEventListener("click", () => {
 

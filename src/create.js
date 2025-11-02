@@ -1,5 +1,4 @@
-import {resetListeners, displayProject, closePopup, sendToStorage, getFromStorage } from "./dom";
-import {projectArray} from "./index.js";
+import {displayProject, sendToStorage, getFromStorage } from "./dom";
 
 //id counters for projects and tasks
 let projectCounter = 0;
@@ -22,7 +21,7 @@ export class Task{
 
         this.title = title;
         this.description = description;
-        this.dueDate = "22-03-2044";
+        this.dueDate = dueDate;
         this.priority = priority;
         this.complete = false;
     };
@@ -77,15 +76,6 @@ export function addNewTask(){
             taskButtonTitle = event.target.title;
         };
     }));
-
-    // taskButton.forEach((event) => {
-
-    //     event.addEventListener("click", () => {
-
-    //         formDiv.style.display = "inline";
-    //         taskButtonTitle = event.title;
-    //     });   
-    // });
 
     taskForm.addEventListener("submit", (event) => {
 
