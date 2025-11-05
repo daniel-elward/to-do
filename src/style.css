@@ -4,9 +4,12 @@ html, body {
 }
 
 #projectWrapper {
-    width: 750px;
-    height: 100vh;
+    width: 80%;
+    min-width: 200px;
     margin: 0 auto;
+    border: 2px solid red;
+    display: flex;
+    flex-wrap: wrap;
     background-color: rgb(212, 189, 125);
 }
 
@@ -49,6 +52,12 @@ html, body {
     left: 25%;
     top: 25%;
     display: none;
+}
+
+.defaultProject{
+    min-width: 250px;
+    min-height: 350px;
+    background-color: red;
 }
 
 .taskComplete {

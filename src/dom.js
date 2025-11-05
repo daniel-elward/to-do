@@ -1,6 +1,7 @@
 import {addNewTask, addNewProject} from "./create.js"
 
 const projectWrapper = document.getElementById("projectWrapper");
+const mainWrapper = document.getElementById("mainWrapper");
 
 function clearDisplay() {
 
@@ -58,6 +59,58 @@ function expandTaskButton(buttonID, projectID, target){
                     target.appendChild(button);
 };
 
+function setDefaultProject(){
+
+    const currentProject = getFromStorage("My Daily Tasks")
+
+    const div = document.createElement("div");
+    const h1 = document.createElement("h1");
+    const para = document.createElement("p");
+    const ol = document.createElement("ol");
+
+    const projectTitle = document.createTextNode("My Daily Tasks");
+    const projectDescription = document.createTextNode("Here are all of todays tasks.");
+    const tasks = currentProject.tasks;
+    const currentProjectTitle = "My Daily Tasks";
+
+    div.setAttribute("class", "projectCard");
+    projectWrapper.appendChild(div);
+        h1.appendChild(projectTitle);
+            div.appendChild(h1);
+                para.appendChild(projectDescription);
+                    div.appendChild(para);
+
+                    div.appendChild(ol);
+            ol.setAttribute("class", "taskList")
+
+        tasks.forEach((element, index) => {
+
+            const li = document.createElement("li");
+            const priorityLevel = element.priority;
+
+            li.textContent = element.title;
+                ol.appendChild(li);
+
+                    if (priorityLevel === "lowPriority"){
+
+                        li.classList.add("lowPriority")
+                    } else if (priorityLevel === "medPriority"){
+
+                        li.classList.add("mediumPriority")
+                    } else if (priorityLevel === "highPriority"){
+
+                        li.classList.add("highPriority")
+                    };
+
+                    //index = counter to get array index of the tasks
+                    deleteTaskButton(index, currentProjectTitle, li);
+                    expandTaskButton(index, currentProjectTitle, li);
+        });
+
+    //new task and delete buttons
+    newTaskButton(currentProjectTitle, div);
+};
+
 export function expandTask(){
 
     const title = document.querySelector(".taskTitle");
@@ -94,9 +147,13 @@ export function displayProject() {
 
     const keys = Object.keys(localStorage);
     
+    setDefaultProject();
+
     for(let i = 0; i < localStorage.length; i++){
 
         const currentProject = getFromStorage(keys[i])
+
+        if (currentProject.title === "My Daily Tasks"){continue;};
 
         const div = document.createElement("div");
         const h1 = document.createElement("h1");
@@ -194,7 +251,7 @@ export function newProjectButton(){
 
     button.textContent = "New Project";
         button.setAttribute("id", "newProjectButton");
-            projectWrapper.appendChild(button);
+            mainWrapper.appendChild(button);
 };
 
 export function sendToStorage(title, object){
@@ -209,17 +266,4 @@ export function getFromStorage(key){
     const project = JSON.parse(localStorage.getItem(key));
 
     return project;
-};
-
-export function resetListeners() {
-
-    addNewProject();
-    addNewTask();
-    displayProject(); 
-        
-    // deleteProject();
-    // deleteTask();
-    // closePopup();
-    // addNewTask(); 
-
 };

@@ -15,7 +15,6 @@ import {newProjectButton, displayProject, closePopup, getFromStorage,expandTask}
     } 
 }());
 
-newProjectButton();
 closePopup();
 displayProject();
 addNewProject()

@@ -6,60 +6,62 @@
     <title>The Odin Project: To-Do list</title>
 </head>
 <body>
-<div id="projectWrapper">
+<div id="mainWrapper">
+    <button id="newProjectButton">New Project</button>
+    <div id="projectWrapper">
 
-    <div id="newProjectForm">
-        <button class="closeButton" name="newProjectForm">X</button>
+        <div id="newProjectForm">
+            <button class="closeButton" name="newProjectForm">X</button>
 
-        <h1>Project Form</h1>
+            <h1>Project Form</h1>
 
-        <form id="newProject">
+            <form id="newProject">
 
-            <label>Title</label> <br /><input name="projectTitle" required> <br />
-            <label>Description</label> <br /><input name="projectDescription" required> <br />
+                <label>Title</label> <br /><input name="projectTitle" required> <br />
+                <label>Description</label> <br /><input name="projectDescription" required> <br />
 
-            <button type="reset">Clear</button>
-            <button type="submit" id="newProjectSubmit">Submit</button>
-        </form>
-    </div>
+                <button type="reset">Clear</button>
+                <button type="submit" id="newProjectSubmit">Submit</button>
+            </form>
+        </div>
 
-    <div id="newTaskForm">
-        <button class="closeButton" name="newTaskForm">X</button>
+        <div id="newTaskForm">
+            <button class="closeButton" name="newTaskForm">X</button>
 
-        <h1>Task Form</h1>
+            <h1>Task Form</h1>
 
-            <form id="newTask">
+                <form id="newTask">
 
-            <label>Title</label> <br /><input name="taskTitle" required> <br />
+                <label>Title</label> <br /><input name="taskTitle" required> <br />
 
-            <label>Description</label> <br /><input name="taskDescription" required> <br />
+                <label>Description</label> <br /><input name="taskDescription" required> <br />
 
-            <label>Due Date</label> <br /><input type="date" name="taskDate"> <br />
+                <label>Due Date</label> <br /><input type="date" name="taskDate"> <br />
 
-            <label>Priority</label> <br />
-            <input type="radio" name="taskPriority" value="lowPriority" />
-            <label>Low Priority</label> <br />
+                <label>Priority</label> <br />
+                <input type="radio" name="taskPriority" value="lowPriority" />
+                <label>Low Priority</label> <br />
 
-            <input type="radio" name="taskPriority" value="medPriority" />
-            <label>Med Priority</label> <br />
+                <input type="radio" name="taskPriority" value="medPriority" />
+                <label>Med Priority</label> <br />
 
-            <input type="radio" name="taskPriority" value="highPriority" /> 
-            <label>High Priority</label> <br />
+                <input type="radio" name="taskPriority" value="highPriority" /> 
+                <label>High Priority</label> <br />
 
-            <button type="reset">Clear</button>
-            <button type="submit" id="newTaskSubmit">Submit</button>
-        </form>
-    </div>
+                <button type="reset">Clear</button>
+                <button type="submit" id="newTaskSubmit">Submit</button>
+            </form>
+        </div>
 
-    <div id="taskPopup">
-        <button class="closeButton" name="taskPopup">X</button>
+        <div id="taskPopup">
+            <button class="closeButton" name="taskPopup">X</button>
 
-        <h1 class="taskTitle">Task Title</h1>
-        <h2 class="taskDescription">Task Description</h2>
-        <p class="taskDueDate">Task Due Date</p>
-        <p class="taskPriority"></p>
+            <h1 class="taskTitle">Task Title</h1>
+            <h2 class="taskDescription">Task Description</h2>
+            <p class="taskDueDate">Task Due Date</p>
+            <p class="taskPriority"></p>
+        </div>
     </div>
 </div>
-
 </body>
 </html>
