@@ -185,20 +185,20 @@ export function displayProject() {
             li.textContent = element.title;
                 ol.appendChild(li);
 
-                    if (priorityLevel === "lowPriority"){
+            if (priorityLevel === "lowPriority"){
 
-                        li.classList.add("lowPriority")
-                    } else if (priorityLevel === "medPriority"){
+                li.classList.add("lowPriority")
+            } else if (priorityLevel === "medPriority"){
 
-                        li.classList.add("mediumPriority")
-                    } else if (priorityLevel === "highPriority"){
+                li.classList.add("mediumPriority")
+            } else if (priorityLevel === "highPriority"){
 
-                        li.classList.add("highPriority")
-                    };
+                li.classList.add("highPriority")
+            };
 
-                    //index = counter to get array index of the tasks
-                    deleteTaskButton(index, currentProjectTitle, li);
-                    expandTaskButton(index, currentProjectTitle, li);
+            //index = counter to get array index of the tasks
+            deleteTaskButton(index, currentProjectTitle, li);
+            expandTaskButton(index, currentProjectTitle, li);
         });
 
         //new task and delete buttons

@@ -1,25 +1,58 @@
 html, body {
     padding: 0;
     margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.06em;
+    background-color: #2F4B26;
 }
 
 #projectWrapper {
-    width: 80%;
+    width: 90%;
     min-width: 200px;
     margin: 0 auto;
-    border: 2px solid red;
     display: flex;
     flex-wrap: wrap;
-    background-color: rgb(212, 189, 125);
+    border-radius: 25px;
+    background-color: #c4d6c0;
+}
+
+#newProjectButton {
+    padding: 20px;
+    border-radius: 25px;
+    background-color: #c4d6c0;
+    color: #2F4B26;
+    font-size: 2em;
+}
+
+button#newProjectButton {
+    margin: 0 auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: block;
 }
 
 .projectCard {
-    width:250px;
+    width:300px;
     height: 350px;
     margin: 20px;
     padding: 20px;
     border-radius: 25px;
-    border:2px solid blueviolet;
+    border:2px solid #2F4B26;
+}
+
+.projectCard li {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    background-color: #5799422a;
+}
+
+.deleteTaskButton {
+    flex-direction: row-reverse;
+}
+
+.expandTaskButton {
+    flex-direction: row-reverse;
 }
 
 .projectCardTitle {
@@ -35,33 +68,29 @@ html, body {
 #newProjectForm {
     width: 50%;
     min-height: 350px;
-    background-color: green;
+    background-color: #c4d6c0;
+    border: 2px solid #2F4B26;
+    border-radius: 20px;
     z-index: 1;
     position: absolute;
     left: 25%;
     top: 25%;
     display: none;
+    padding: 20px;
 }
 
 #newTaskForm {
     width: 50%;
-    min-height: 350px;
-    background-color: red;
+    min-height: 350px;    
+    background-color: #c4d6c0;
+    border: 2px solid #2F4B26;
+    border-radius: 20px;
     z-index: 0;
     position: absolute;    
     left: 25%;
     top: 25%;
     display: none;
-}
-
-.defaultProject{
-    min-width: 250px;
-    min-height: 350px;
-    background-color: red;
-}
-
-.taskComplete {
-    background-color: blue;
+    padding: 20px;
 }
 
 .lowPriority {
@@ -79,10 +108,13 @@ html, body {
 #taskPopup{
     width: 50%;
     border-radius: 25px;
-    border: 2px solid red;
-    background-color: aqua;
+    background-color: #c4d6c0;
+    border: 2px solid #2F4B26;
+    border-radius: 20px;
     position: absolute;
     left: 25%;
     top: 25%;
     display: none;
+    padding: 20px;
+
 }
